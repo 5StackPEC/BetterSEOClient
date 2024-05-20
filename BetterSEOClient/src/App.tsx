@@ -1,33 +1,34 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { IconContext } from "react-icons"
+import { FiUpload } from "react-icons/fi"
+import { FileUploader } from "react-drag-drop-files"
+import DragNdrop from "./components/dragAndDrop"
 import './App.css'
+
+const fileTypes = ["JPEG", "PNG", "JPG"];
 
 function App() {
   const [count, setCount] = useState(0)
+  const [file, setFile] = useState(null)
+  const handleChange = (file:any) => {
+    setFile(file);
+  }
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
+      <h1>BetterSEO</h1>
+      <p>Take your website to the next level</p>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+        <IconContext.Provider value={{ color: "white", size: '80px' }}>
+          <div>
+            <FiUpload />
+          </div>
+        </IconContext.Provider>
+        <h2>Drag and drop files or browse</h2>
+        <p>Supported formats: PNG, JPG, JPEG</p>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <h2>Upload your screenshot, we will handle it.</h2>
+      <button>Upload Screenshot</button>
     </>
   )
 }
