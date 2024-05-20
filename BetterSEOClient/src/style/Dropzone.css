@@ -1,0 +1,18 @@
+.card {
+  width: 65vh;
+  height: 30vh;
+  margin: 5vh;
+  padding: 5vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #0F072E;
+  border-style: dotted;
+  border-color: #B3A8F0;
+  border-radius: 10px;
+  }
+
+.file{
+  color: greenyellow;
+}
