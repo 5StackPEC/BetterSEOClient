@@ -4,11 +4,17 @@ import { FiUpload } from "react-icons/fi";
 import "../style/Dropzone.css";
 
 export default function Dropzone() {
-  const { getRootProps, getInputProps, acceptedFiles } = useDropzone({});
+  const { getRootProps, getInputProps, acceptedFiles } = useDropzone({
+    multiple: false,
+    accept: {
+      "image/png": [".png"],
+      "image/jpg": [".jpeg", ".jpg"],
+    },
+  });
 
   const files = acceptedFiles.map((file: FileWithPath) => (
     <li key={file.path}>
-      {file.path} - {file.size} bytes
+      {file.path} - {(file.size / 1e6).toFixed(2)} mb
     </li>
   ));
 
