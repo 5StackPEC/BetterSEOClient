@@ -1,9 +1,18 @@
-const UploadButton = () => {
-  const handleClick = () => {
-    alert("File uploaded!");
-  };
+interface Props {
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  disabled: boolean;
+}
 
-  return <button onClick={handleClick}>Upload Screenshot</button>;
+const UploadButton = ({ onClick, disabled }: Props) => {
+  return (
+    <button
+      disabled={disabled}
+      onClick={onClick}
+      className={disabled ? "disabled" : "rainbownButton"}
+    >
+      Upload Screenshot
+    </button>
+  );
 };
 
 export default UploadButton;
