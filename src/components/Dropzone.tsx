@@ -1,17 +1,16 @@
-import { useState } from "react";
 import { useDropzone, FileWithPath } from "React-dropzone";
 import { IconContext } from "react-icons";
 import { FiUpload } from "react-icons/fi";
+import { Image } from "../types/forms";
 import "../style/Dropzone.css";
+import { useEffect } from "react";
 
-interface Image {
-  file: File;
-  preview: string;
+interface Props {
+  image: Image | undefined;
+  setImage: React.Dispatch<React.SetStateAction<Image | undefined>>;
 }
 
-const Dropzone = () => {
-  const [image, setImage] = useState<Image>();
-
+const Dropzone = ({ image, setImage }: Props) => {
   const onDrop = (acceptedFiles: File[]) => {
     const file = acceptedFiles[0];
     setImage({ file: file, preview: URL.createObjectURL(file) });
@@ -23,8 +22,14 @@ const Dropzone = () => {
       "image/png": [".png"],
       "image/jpg": [".jpeg", ".jpg"],
     },
-    onDrop,
+    onDrop: onDrop,
   });
+
+  useEffect(() => {
+    if (acceptedFiles.length === 0) {
+      setImage(undefined);
+    }
+  }, [acceptedFiles.length, setImage]);
 
   const files = acceptedFiles.map((file: FileWithPath) => (
     <li key={file.path}>
@@ -43,7 +48,9 @@ const Dropzone = () => {
             </IconContext.Provider>
             <h2>Drag and drop files or browse</h2>
             <p>Supported formats: PNG, JPG, JPEG</p>
-            {files.length !== 0 && <img src={image?.preview} className="imagePreview" />}
+            {files.length !== 0 && (
+              <img src={image?.preview} className="imagePreview" />
+            )}
           </div>
         </div>
       </div>
